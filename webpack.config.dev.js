@@ -14,13 +14,13 @@ module.exports ={
             hotMiddlewareScript
         ]
     },
-    vendors:[
+    vendor:[
         'react','react-dom','react-router'
     ],
     output:{
         filename:'[name].js',
-        publicPath:'/static/',
-        path: __dirname + '/static/'
+        publicPath:'/build/',
+        path: __dirname + '/build/'
     },
     module:{
         loaders:[
@@ -37,7 +37,7 @@ module.exports ={
         extensions:['','.js','.jsx','.css']
     },
     plugins:[
-        new webpack.optimize.CommonsChunkPlugin('vendors','vendors.js'),
+        new webpack.optimize.CommonsChunkPlugin('vendor','vendor.js'),
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':JSON.stringify(process.env.NODE_ENV),
