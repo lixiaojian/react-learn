@@ -2,7 +2,6 @@
  * Created by 872458899@qq.com on 2017/1/7.
  */
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 
 const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
@@ -12,11 +11,12 @@ module.exports ={
         app:[
             './src/app.js',
             hotMiddlewareScript
+        ],
+        imgeCuter:[
+            './src/ImageCuter.js',
+            hotMiddlewareScript
         ]
     },
-    vendor:[
-        'react','react-dom','react-router'
-    ],
     output:{
         filename:'[name].js',
         publicPath:'/build/',
@@ -25,19 +25,26 @@ module.exports ={
     module:{
         loaders:[
             {
-                test:/\.jsx?$/,
+                test:/\.js$/,
                 include:[
                     path.resolve(__dirname,'src')
                 ],
                 loaders:['react-hot','babel-loader']
+            },
+            {
+                test: /\.less$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]
             }
         ]
     },
     resolve:{
-        extensions:['','.js','.jsx','.css']
+        extensions:['','.js','.css']
     },
     plugins:[
-        new webpack.optimize.CommonsChunkPlugin('vendor','vendor.js'),
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':JSON.stringify(process.env.NODE_ENV),
